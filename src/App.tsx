@@ -17,10 +17,9 @@ function App() {
       }}
       height="100vh"
       gap="1"
-      color="blackAlpha.700"
       fontWeight="bold"
     >
-      <GridItem bg={"coral"} area={"nav"}>
+      <GridItem area={"nav"}>
         <NavBar />
       </GridItem>
       <Show above="lg">
