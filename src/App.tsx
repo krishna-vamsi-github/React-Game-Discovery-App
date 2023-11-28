@@ -16,7 +16,6 @@ function App() {
         base: "1fr",
         lg: "150px 1fr",
       }}
-      height="100vh"
       gap="1"
       fontWeight="bold"
     >
