@@ -16,6 +16,7 @@ interface FetchGamesResponse {
   count: number;
   results: Game[];
 }
+
 class GameService {
   getAllGames() {
     const controller = new AbortController();
