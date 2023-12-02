@@ -1,5 +1,6 @@
-import { Text } from "@chakra-ui/react";
+import { HStack, Image, Text } from "@chakra-ui/react";
 import useData from "../hooks/useData";
+import getCroppedImageUrl from "../services/image-url";
 
 export interface Genre {
   id: number;
@@ -11,9 +12,22 @@ export interface Genre {
 
 const Genres = () => {
   const { error, data, isLoading } = useData<Genre>("/genres");
-  return <>
-    {data.map((genre) =><Text fontSize={"20px"} key={genre.id}>{genre.name}</Text>)}
-  </>
+  return (
+    <>
+      {data.map((genre) => (
+        <HStack marginY={5} key={genre.id}>
+          <Image
+            boxSize="32px"
+            borderRadius={"15%"}
+            objectFit="cover"
+            src={getCroppedImageUrl(genre.image_background, "150", "150")}
+            alt="Dan Abramov"
+          />
+          <Text fontSize="lg">{genre.name}</Text>
+        </HStack>
+      ))}
+    </>
+  );
 };
 
 export default Genres;

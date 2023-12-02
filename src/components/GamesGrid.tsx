@@ -22,7 +22,6 @@ const GamesGrid = () => {
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>
-      <h3>All Games</h3>
       {error && <h3>{error}</h3>}
       <SimpleGrid
         columns={{

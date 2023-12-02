@@ -12,19 +12,18 @@ function App() {
         lg: `"nav nav"
         "aside main"`,
       }}
-      gridTemplateRows={"60px 1fr"}
+      gridTemplateRows={"80px 1fr"}
       gridTemplateColumns={{
         base: "1fr",
-        lg: "150px 1fr",
+        lg: "200px 1fr",
       }}
       gap="1"
-      fontWeight="bold"
     >
       <GridItem area={"nav"}>
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem pl="2" area={"aside"}>
+        <GridItem pl="2" area={"aside"} paddingX={5}>
           <Heading>Genres</Heading>
           <Genres />
         </GridItem>
