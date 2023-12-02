@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
-import genresService, {
-  FetchGenresResponse,
-  Genre,
-} from "../services/genres-service";
+import useData from "../hooks/useData";
+
+export interface Genre {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+}
 
 const Genres = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
-  useEffect(() => {
-    const { request, cancel } = genresService.getAll<FetchGenresResponse>();
-    request.then(({ data }) => setGenres(data.results));
-    return () => cancel();
-  }, []);
+  const { error, data, isLoading } = useData<Genre>("/genres");
   return <></>;
 };
 
