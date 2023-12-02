@@ -3,10 +3,14 @@ import useData from "../hooks/useData";
 import getCroppedImageUrl from "../services/image-url";
 import { Genre } from "../models/genre.model";
 
-const Genres = () => {
+interface Props {
+  sortByGenre: (selectedGenre: string) => void;
+}
+
+const Genres = ({ sortByGenre }: Props) => {
   const { error, data, isLoading } = useData<Genre>("/genres");
-  if(error) return null; 
-  if(isLoading) return <Spinner />;
+  if (error) return null;
+  if (isLoading) return <Spinner />;
   return (
     <>
       {data.map((genre) => (
@@ -18,7 +22,9 @@ const Genres = () => {
             src={getCroppedImageUrl(genre.image_background, "150", "150")}
             alt="Dan Abramov"
           />
-          <Text fontSize="lg">{genre.name}</Text>
+          <Text fontSize="lg" onClick={() => sortByGenre(genre.name)}>
+            {genre.name}
+          </Text>
         </HStack>
       ))}
     </>
