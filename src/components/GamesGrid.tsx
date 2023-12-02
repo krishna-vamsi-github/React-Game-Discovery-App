@@ -3,19 +3,7 @@ import GameCard from "./GameCard";
 import SkeletonGameCard from "./SkeletonGameCard";
 import GameCardContainer from "./GameCardContainer";
 import useData from "../hooks/useData";
-
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: Platform }[];
-  metacritic: number;
-}
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Game } from "../models/game.model";
 
 const GamesGrid = () => {
   const { error, data, isLoading } = useData<Game>("/games");
