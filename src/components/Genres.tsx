@@ -1,4 +1,4 @@
-import { HStack, Image, Text } from "@chakra-ui/react";
+import { HStack, Image, Spinner, Text } from "@chakra-ui/react";
 import useData from "../hooks/useData";
 import getCroppedImageUrl from "../services/image-url";
 
@@ -12,10 +12,12 @@ export interface Genre {
 
 const Genres = () => {
   const { error, data, isLoading } = useData<Genre>("/genres");
+  if(error) return null; 
+  if(isLoading) return <Spinner />;
   return (
     <>
       {data.map((genre) => (
-        <HStack marginY={5} key={genre.id}>
+        <HStack marginBottom={5} key={genre.id}>
           <Image
             boxSize="32px"
             borderRadius={"15%"}

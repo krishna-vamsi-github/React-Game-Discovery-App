@@ -24,7 +24,6 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem pl="2" area={"aside"} paddingX={5}>
-          <Heading>Genres</Heading>
           <Genres />
         </GridItem>
       </Show>
