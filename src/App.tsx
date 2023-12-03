@@ -3,10 +3,11 @@ import NavBar from "./components/NavBar";
 import GamesGrid from "./components/GamesGrid";
 import Genres from "./components/Genres";
 import { useState } from "react";
+import { Genre } from "./models/genre.model";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const handleGenreSortSelection = (genre: string) => {
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const handleGenreSortSelection = (genre: Genre) => {
     setSelectedGenre(genre);
   };
   return (
@@ -29,7 +30,10 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem pl="2" area={"aside"} paddingX={5}>
-          <Genres sortByGenre={handleGenreSortSelection} />
+          <Genres
+            selectedGenre={selectedGenre}
+            sortByGenre={handleGenreSortSelection}
+          />
         </GridItem>
       </Show>
       <GridItem pl="2" pr="4" area={"main"}>

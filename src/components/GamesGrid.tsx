@@ -4,20 +4,18 @@ import SkeletonGameCard from "./SkeletonGameCard";
 import GameCardContainer from "./GameCardContainer";
 import useData from "../hooks/useData";
 import { Game } from "../models/game.model";
-import { useState } from "react";
+import { Genre } from "../models/genre.model";
 
 interface Props {
-  selectedGenre: string;
+  selectedGenre: Genre | null;
 }
 const GamesGrid = ({ selectedGenre }: Props) => {
-  const { error, data, isLoading } = useData<Game>("/games");
-  selectedGenre = selectedGenre ? selectedGenre : "";
+  const { error, data, isLoading } = useData<Game>(
+    "/games",
+    { params: { genres: selectedGenre?.id } },
+    [selectedGenre?.id]
+  );
   const skeletons = [1, 2, 3, 4, 5, 6];
-  const filteredExpenses = selectedGenre
-    ? data.filter(
-        (dat) => dat.genres.filter((gen) => gen.name === selectedGenre).length
-      )
-    : data;
 
   return (
     <>
@@ -36,13 +34,13 @@ const GamesGrid = ({ selectedGenre }: Props) => {
               <SkeletonGameCard />
             </GameCardContainer>
           ))}
-        {filteredExpenses.length === 0 && (
+        {data.length === 0 && (
           <Text fontSize={30}>
             {" "}
-            {selectedGenre} genre games are not available
+            {selectedGenre?.name} genre games are not available
           </Text>
         )}
-        {filteredExpenses.map((game) => (
+        {data.map((game) => (
           <div key={game.id}>
             <GameCardContainer>
               <GameCard game={game} />
