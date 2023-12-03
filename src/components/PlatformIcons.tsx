@@ -1,5 +1,5 @@
 import { HStack, Icon, Text } from "@chakra-ui/react";
-import { Platform } from "../models/game.model";
+import { Platform } from "../models/platform.model";
 import { MdOutlinePersonalVideo } from "react-icons/md";
 import { SiPlaystation } from "react-icons/si";
 import { SiXbox } from "react-icons/si";

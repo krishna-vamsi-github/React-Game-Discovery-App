@@ -1,4 +1,5 @@
 import { Genre } from "./genre.model";
+import { Platform } from "./platform.model";
 
 export interface Game {
   id: number;
@@ -7,9 +8,4 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
   genres: Genre[];
-}
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
 }
