@@ -12,17 +12,27 @@ import { useState } from "react";
 import useData from "../hooks/useData";
 import { Platform } from "../models/platform.model";
 
-function PlatformSelector() {
+interface Props {
+  onSelectPlatform: (platform: Platform) => void;
+  selectedPlatform: Platform | null;
+}
+
+function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
+  // useState(null)
   const { data } = useData<Platform>("/platforms");
   return (
     <>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          <Text>Platforms</Text>
+          {selectedPlatform?.name || <Text>Platforms</Text>}
         </MenuButton>
         <MenuList>
           {data.map((platform) => (
-            <MenuItem key={platform.id} value={platform.name}>
+            <MenuItem
+              key={platform.id}
+              value={platform.name}
+              onClick={() => onSelectPlatform(platform)}
+            >
               {platform.name}
             </MenuItem>
           ))}

@@ -5,23 +5,25 @@ import GameCardContainer from "./GameCardContainer";
 import useData from "../hooks/useData";
 import { Game } from "../models/game.model";
 import { Genre } from "../models/genre.model";
-import PlatformSelector from './PlatformSelector';
+import PlatformSelector from "./PlatformSelector";
+import { Platform } from "../models/platform.model";
 
 interface Props {
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
 }
-const GamesGrid = ({ selectedGenre }: Props) => {
+
+const GamesGrid = ({ selectedGenre, selectedPlatform }: Props) => {
   const { error, data, isLoading } = useData<Game>(
     "/games",
-    { params: { genres: selectedGenre?.id } },
-    [selectedGenre?.id]
+    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
+    [selectedGenre?.id, selectedPlatform?.id]
   );
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
       {error && <h3>{error}</h3>}
-      <PlatformSelector />
       <SimpleGrid
         columns={{
           sm: 1,
