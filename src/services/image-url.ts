@@ -1,5 +1,7 @@
+import noImage from "../assets/Screenshot.jpg";
+
 const getCroppedImageUrl = (url: string, width: string, height: string) => {
-  if (!url) return "";
+  if (!url) return noImage;
   const target = "media/";
   const slash = "/";
   const index = url.indexOf(target) + target.length;
