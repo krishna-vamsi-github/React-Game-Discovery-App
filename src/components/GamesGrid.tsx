@@ -4,20 +4,17 @@ import SkeletonGameCard from "./SkeletonGameCard";
 import GameCardContainer from "./GameCardContainer";
 import useData from "../hooks/useData";
 import { Game } from "../models/game.model";
-import { Genre } from "../models/genre.model";
-import PlatformSelector from "./PlatformSelector";
-import { Platform } from "../models/platform.model";
+import { GameQuery } from "../models/gameQuery.model";
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery
 }
 
-const GamesGrid = ({ selectedGenre, selectedPlatform }: Props) => {
+const GamesGrid = ({ gameQuery }: Props) => {
   const { error, data, isLoading } = useData<Game>(
     "/games",
-    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
-    [selectedGenre?.id, selectedPlatform?.id]
+    { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id } },
+    [gameQuery]
   );
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -42,7 +39,7 @@ const GamesGrid = ({ selectedGenre, selectedPlatform }: Props) => {
         {data.length === 0 && (
           <Text fontSize={30}>
             {" "}
-            {selectedGenre?.name} genre games are not available
+            {gameQuery.genre?.name} genre games are not available
           </Text>
         )}
         {data.map((game) => (
