@@ -7,13 +7,19 @@ import { Game } from "../models/game.model";
 import { GameQuery } from "../models/gameQuery.model";
 
 interface Props {
-  gameQuery: GameQuery
+  gameQuery: GameQuery;
 }
 
 const GamesGrid = ({ gameQuery }: Props) => {
   const { error, data, isLoading } = useData<Game>(
     "/games",
-    { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id } },
+    {
+      params: {
+        genres: gameQuery.genre?.id,
+        platforms: gameQuery.platform?.id,
+        ordering: gameQuery.sortOrder,
+      },
+    },
     [gameQuery]
   );
   const skeletons = [1, 2, 3, 4, 5, 6];
