@@ -18,6 +18,7 @@ const GamesGrid = ({ gameQuery }: Props) => {
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
         ordering: gameQuery.sortOrder,
+        search: gameQuery.searchQuery
       },
     },
     [gameQuery]
