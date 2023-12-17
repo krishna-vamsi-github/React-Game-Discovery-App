@@ -3,10 +3,10 @@ import NavBar from "./components/NavBar";
 import GamesGrid from "./components/GamesGrid";
 import Genres from "./components/Genres";
 import { useState } from "react";
-import { Genre } from "./models/genre.model";
 import PlatformSelector from "./components/PlatformSelector";
 import { GameQuery } from "./models/gameQuery.model";
 import SortSelector from "./components/SortSelector";
+import DynamicHeading from "./components/DynamicHeading";
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
@@ -42,6 +42,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem pl="2" pr="4" area={"main"}>
+        <DynamicHeading gameQuery={gameQuery}/>
         <HStack spacing={5}>
           <PlatformSelector
             onSelectPlatform={(platform) =>
