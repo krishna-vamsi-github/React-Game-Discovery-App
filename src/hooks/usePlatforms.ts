@@ -1,23 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { Genre } from "../models/genre.model";
 import apiClient from "../services/api-client";
+import { Platform } from "../models/platform.model";
 
 interface FetchResponse<T> {
   count: number;
   results: T[];
 }
 
-const useGenres = () => {
-  return useQuery<FetchResponse<Genre>, Error>({
-    queryKey: ["genres"],
+const usePlatforms = () => {
+  return useQuery<FetchResponse<Platform>>({
+    queryKey: ["platforms"],
     queryFn: () => {
       return apiClient
-        .get<FetchResponse<Genre>>("/genres")
+        .get<FetchResponse<Platform>>("/platforms/lists/parents")
         .then((res) => res.data);
     },
-    staleTime: 24 * 60 * 60 * 1000, //24 hours
+    staleTime: 24 * 60 * 60 * 1000, //24 hours,
     // initialData: { count: 0, results: []}
   });
 };
 
-export default useGenres;
+export default usePlatforms;
