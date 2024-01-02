@@ -1,7 +1,7 @@
 import { HStack, Image, Spinner, Button, Heading } from "@chakra-ui/react";
-import useData from "../hooks/useData";
 import getCroppedImageUrl from "../services/image-url";
 import { Genre } from "../models/genre.model";
+import useGenres from "../hooks/useGenres";
 
 interface Props {
   sortByGenre: (selectedGenre: Genre) => void;
@@ -9,7 +9,8 @@ interface Props {
 }
 
 const Genres = ({ sortByGenre, selectedGenre }: Props) => {
-  const { error, data, isLoading } = useData<Genre>("/genres");
+  // const { error, data, isLoading } = useData<Genre>("/genres");
+  const { error, data, isLoading } = useGenres();
   if (error) return null;
   if (isLoading) return <Spinner />;
   return (
@@ -17,7 +18,7 @@ const Genres = ({ sortByGenre, selectedGenre }: Props) => {
       <Heading fontSize="2xl" paddingBottom={3}>
         Genres
       </Heading>
-      {data.map((genre) => (
+      {data?.results.map((genre) => (
         <HStack marginBottom={5} key={genre.id}>
           <Image
             boxSize="32px"
