@@ -4,13 +4,11 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Select,
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useState } from "react";
-import useData from "../hooks/useData";
 import { Platform } from "../models/platform.model";
+import usePlatforms from "../hooks/usePlatforms";
 
 interface Props {
   onSelectPlatform: (platform: Platform) => void;
@@ -19,7 +17,7 @@ interface Props {
 
 function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
   // useState(null)
-  const { data } = useData<Platform>("/platforms");
+  const { data } = usePlatforms();
   return (
     <>
       <Menu>
@@ -27,7 +25,7 @@ function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
           {selectedPlatform?.name || <Text>Platforms</Text>}
         </MenuButton>
         <MenuList>
-          {data.map((platform) => (
+          {data?.results.map((platform) => (
             <MenuItem
               key={platform.id}
               value={platform.name}
