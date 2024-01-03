@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Genre } from "../models/genre.model";
-import apiClient from "../services/api-client";
-
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
+import apiClient, { FetchResponse } from "../services/api-client";
 
 const useGenres = () => {
   return useQuery<FetchResponse<Genre>, Error>({

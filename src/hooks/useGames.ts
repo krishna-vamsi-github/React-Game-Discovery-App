@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Game } from "../models/game.model";
 import { GameQuery } from "../models/gameQuery.model";
-import apiClient from "../services/api-client";
-
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
+import apiClient, { FetchResponse } from "../services/api-client";
 
 const useGames = (gameQuery: GameQuery) => {
   return useQuery<FetchResponse<Game>, Error>({

@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "../services/api-client";
+import apiClient, { FetchResponse } from "../services/api-client";
 import { Platform } from "../models/platform.model";
-
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
 
 const usePlatforms = () => {
   return useQuery<FetchResponse<Platform>>({
