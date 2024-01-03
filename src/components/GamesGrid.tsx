@@ -1,33 +1,21 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import GameCard from "./GameCard";
-import SkeletonGameCard from "./SkeletonGameCard";
-import GameCardContainer from "./GameCardContainer";
-import useData from "../hooks/useData";
-import { Game } from "../models/game.model";
+import useGames from "../hooks/useGames";
 import { GameQuery } from "../models/gameQuery.model";
+import GameCard from "./GameCard";
+import GameCardContainer from "./GameCardContainer";
+import SkeletonGameCard from "./SkeletonGameCard";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 const GamesGrid = ({ gameQuery }: Props) => {
-  const { error, data, isLoading } = useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: gameQuery.genre?.id,
-        platforms: gameQuery.platform?.id,
-        ordering: gameQuery.sortOrder,
-        search: gameQuery.searchQuery
-      },
-    },
-    [gameQuery]
-  );
+  const { error, data, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
-      {error && <h3>{error}</h3>}
+      {error && <h3>{error.message}</h3>}
       <SimpleGrid
         columns={{
           sm: 1,
@@ -43,13 +31,13 @@ const GamesGrid = ({ gameQuery }: Props) => {
               <SkeletonGameCard />
             </GameCardContainer>
           ))}
-        {data.length === 0 && (
+        {data?.results?.length === 0 && (
           <Text fontSize={30}>
             {" "}
             {gameQuery.genre?.name} genre games are not available
           </Text>
         )}
-        {data.map((game) => (
+        {data?.results.map((game) => (
           <div key={game.id}>
             <GameCardContainer>
               <GameCard game={game} />
