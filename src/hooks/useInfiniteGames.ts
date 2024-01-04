@@ -9,7 +9,7 @@ const useInfiniteGames = (gameQuery: GameQuery) => {
   const fetchGames = ({ pageParam = 1 }) => {
     return apiClient.getAll({
       params: {
-        genres: gameQuery.genre?.id,
+        genres: gameQuery.genreId,
         parent_platforms: gameQuery.platform?.id,
         ordering: gameQuery.sortOrder,
         search: gameQuery.searchQuery,

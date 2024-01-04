@@ -62,7 +62,7 @@ const GamesGrid = ({ gameQuery }: Props) => {
           {data?.pages.length === 0 && (
             <Text fontSize={30}>
               {" "}
-              {gameQuery.genre?.name} genre games are not available
+              genre games are not available
             </Text>
           )}
 
