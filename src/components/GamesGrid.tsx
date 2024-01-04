@@ -4,13 +4,21 @@ import { GameQuery } from "../models/gameQuery.model";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import SkeletonGameCard from "./SkeletonGameCard";
+import useInfiniteGames from "../hooks/useInfiniteGames";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 const GamesGrid = ({ gameQuery }: Props) => {
-  const { error, data, isLoading } = useGames(gameQuery);
+  const {
+    error,
+    data,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
@@ -31,19 +39,39 @@ const GamesGrid = ({ gameQuery }: Props) => {
               <SkeletonGameCard />
             </GameCardContainer>
           ))}
-        {data?.results?.length === 0 && (
+        {data?.pages.length === 0 && (
           <Text fontSize={30}>
             {" "}
             {gameQuery.genre?.name} genre games are not available
           </Text>
         )}
-        {data?.results.map((game) => (
+
+        {/* This code is for Infinite data */}
+        {data?.pages.map((page) =>
+          page.results.map((game) => (
+            <div key={game.id}>
+              <GameCardContainer>
+                <GameCard game={game} />
+              </GameCardContainer>
+            </div>
+          ))
+        )}
+        <button
+          disabled={!hasNextPage}
+          className="btn btn-success"
+          onClick={() => fetchNextPage()}
+        >
+          Next
+        </button>
+
+        {/* this code is for normal data
+         {data?.results.map((game) => (
           <div key={game.id}>
             <GameCardContainer>
               <GameCard game={game} />
             </GameCardContainer>
           </div>
-        ))}
+        ))} */}
       </SimpleGrid>
     </>
   );
