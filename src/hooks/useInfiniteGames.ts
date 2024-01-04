@@ -23,7 +23,7 @@ const useInfiniteGames = (gameQuery: GameQuery) => {
     getNextPageParam: (lastPage, pages) =>
       lastPage.next ? pages.length + 1 : undefined,
     // cacheTime: 0,
-    staleTime: 60 * 60 * 1000, // 60 minutes
+    staleTime: 24 * 60 * 60 * 1000, // 60 minutes
   });
 };
 
