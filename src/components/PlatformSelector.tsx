@@ -12,17 +12,17 @@ import usePlatforms from "../hooks/usePlatforms";
 
 interface Props {
   onSelectPlatform: (platform: Platform) => void;
-  selectedPlatform: Platform | null;
+  selectedPlatformId?:number;
 }
 
-function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
+function PlatformSelector({ onSelectPlatform, selectedPlatformId }: Props) {
   // useState(null)
   const { data } = usePlatforms();
   return (
     <>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          {selectedPlatform?.name || <Text>Platforms</Text>}
+          {data?.results.find((platform) => platform.id === selectedPlatformId)?.name || <Text>Platforms</Text>}
         </MenuButton>
         <MenuList>
           {data?.results.map((platform) => (

@@ -5,10 +5,10 @@ import useGenres from "../hooks/useGenres";
 
 interface Props {
   sortByGenre: (selectedGenre: Genre) => void;
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
 }
 
-const Genres = ({ sortByGenre, selectedGenre }: Props) => {
+const Genres = ({ sortByGenre, selectedGenreId }: Props) => {
   // const { error, data, isLoading } = useData<Genre>("/genres");
   const { error, data, isLoading } = useGenres();
   if (error) return null;
@@ -28,7 +28,7 @@ const Genres = ({ sortByGenre, selectedGenre }: Props) => {
             alt="Dan Abramov"
           />
           <Button
-            fontWeight={selectedGenre?.id === genre.id ? "bold" : "normal"}
+            fontWeight={selectedGenreId === genre.id ? "bold" : "normal"}
             whiteSpace="normal"
             textAlign="left"
             fontSize={"lg"}
