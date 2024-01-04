@@ -1,10 +1,11 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import { GameQuery } from "../models/gameQuery.model";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import SkeletonGameCard from "./SkeletonGameCard";
 import useInfiniteGames from "../hooks/useInfiniteGames";
+import React from "react";
 
 interface Props {
   gameQuery: GameQuery;
@@ -47,22 +48,22 @@ const GamesGrid = ({ gameQuery }: Props) => {
         )}
 
         {/* This code is for Infinite data */}
-        {data?.pages.map((page) =>
-          page.results.map((game) => (
-            <div key={game.id}>
-              <GameCardContainer>
-                <GameCard game={game} />
-              </GameCardContainer>
-            </div>
-          ))
+        {data?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page?.results.map((game) => (
+              <div key={game.id}>
+                <GameCardContainer>
+                  <GameCard game={game} />
+                </GameCardContainer>
+              </div>
+            ))}
+          </React.Fragment>
+        ))}
+        {hasNextPage && (
+          <Button onClick={() => fetchNextPage()}>
+            {isFetchingNextPage ? "Loading..." : "Next"}
+          </Button>
         )}
-        <button
-          disabled={!hasNextPage}
-          className="btn btn-success"
-          onClick={() => fetchNextPage()}
-        >
-          Next
-        </button>
 
         {/* this code is for normal data
          {data?.results.map((game) => (

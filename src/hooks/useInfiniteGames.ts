@@ -14,7 +14,6 @@ const useInfiniteGames = (gameQuery: GameQuery) => {
         ordering: gameQuery.sortOrder,
         search: gameQuery.searchQuery,
         page: pageParam,
-        page_size: 10,
       },
     });
   };
@@ -22,7 +21,7 @@ const useInfiniteGames = (gameQuery: GameQuery) => {
     queryKey: ["games", gameQuery],
     queryFn: fetchGames,
     getNextPageParam: (lastPage, pages) =>
-      lastPage ? pages.length + 1 : undefined,
+      lastPage.next ? pages.length + 1 : undefined,
     // cacheTime: 0,
     staleTime: 60 * 60 * 1000, // 60 minutes
   });
