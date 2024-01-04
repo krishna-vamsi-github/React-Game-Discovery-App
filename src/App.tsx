@@ -49,9 +49,9 @@ function App() {
         }}>
           <PlatformSelector
             onSelectPlatform={(platform) =>
-              setGameQuery({ ...gameQuery, platform })
+              setGameQuery({ ...gameQuery, platformId: platform.id })
             }
-            selectedPlatform={gameQuery.platform}
+            selectedPlatformId={gameQuery.platformId}
           />
           <SortSelector
             onSelectSortOrder={(value) =>

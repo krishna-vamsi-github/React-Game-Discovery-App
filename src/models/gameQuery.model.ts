@@ -4,7 +4,7 @@ import { Platform } from "./platform.model";
 export interface GameQuery {
   // genre: Genre | undefined     is best practice
   genreId?: number;
-  platform: Platform | null;
+  platformId?: number;
   sortOrder: string;
   searchQuery: string;
 }
